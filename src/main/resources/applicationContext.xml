@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- id属性 名字（唯一标识）
+    class属性 配置的全限定名 -->
+    <bean id="person" class="com.spring5.basic.Person"/>
+    <!-- name属性 别名 可以有多个，用逗号隔开  id相当于人的大名，name相当于人的小名字 -->
+    <bean id="person1" name ="p,p1" class="com.spring5.basic.Person"/>
+    <!-- 只有class 属性也是可以的，spring会自己默认设置一个id属性 -->
+    <bean class="com.spring5.basic.User"/>
+
+</beans>
