@@ -3,6 +3,12 @@ package com.spring5.basic;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import sun.plugin.security.JDK11ClassFileTransformer;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 public class SpringTest {
 
@@ -10,7 +16,7 @@ public class SpringTest {
     public void test1() {
 //        UserService userService = new UserServiceImpl();
 //        UserService userService = BeanFactory.getUserService();
-        UserService userService = (UserService)BeanFactory.getBean("userService");
+        UserService userService = (UserService) BeanFactory.getBean("userService");
         userService.login("张三", "123123");
 
         User user = new User("张三", "123123");
@@ -82,5 +88,130 @@ public class SpringTest {
         }
     }
 
+    /**
+     * 测试 私有化构造方法 的类 可以被创建
+     */
+    @Test
+    public void test6() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        User user = (User) ctx.getBean("user");
+        System.out.println("user = " + user);
+    }
+
+    /**
+     * 普通的set方法注入
+     */
+    @Test
+    public void test7() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person person = (Person) ctx.getBean("person");
+        person.setId(1);
+        person.setName("张三");
+        System.out.println("person = " + person);
+    }
+
+    /**
+     * 用spring工厂set注入--普通类型+String
+     */
+    @Test
+    public void test8() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person person = (Person) ctx.getBean("person2");
+        System.out.println("person = " + person);
+    }
+
+    /**
+     * 用spring工厂set注入--数组类型
+     */
+    @Test
+    public void test9() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person person = (Person) ctx.getBean("person2");
+        String[] emails = person.getEmails();
+        for (String email : emails) {
+            System.out.println("email = " + email);
+        }
+    }
+
+    /**
+     * 用spring工厂set注入--Set集合
+     */
+    @Test
+    public void test10() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person person = (Person) ctx.getBean("person2");
+        Set<String> tels = person.getTels();
+        for (String tel : tels) {
+            System.out.println("tels = " + tel);
+        }
+    }
+
+    /**
+     * 用spring工厂set注入--List集合
+     */
+    @Test
+    public void test11() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person person = (Person) ctx.getBean("person2");
+        List<String> addresses = person.getAddresses();
+        for (String address : addresses) {
+            System.out.println("address = " + address);
+        }
+    }
+
+    /**
+     * 用spring工厂set注入--Map集合
+     */
+    @Test
+    public void test12() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person person = (Person) ctx.getBean("person2");
+        Map<String, String> qqs = person.getQqs();
+        for (Map.Entry entry : qqs.entrySet()) {
+            System.out.println("key = " + entry.getKey()
+                    + ", value = " + entry.getValue());
+        }
+        System.out.println("======================================");
+        final Set<String> strings = qqs.keySet();
+        for (String string : strings) {
+            System.out.println("key = " + string
+                    + ", value = " + qqs.get(string));
+        }
+    }
+
+    /**
+     * 用spring工厂set注入--Properties集合
+     */
+    @Test
+    public void test13() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person person = (Person) ctx.getBean("person2");
+        Properties p = person.getP();
+        System.out.println("key is k1 value is "+p.get("k1"));
+        System.out.println("key is k2 value is "+p.get("k2"));
+        System.out.println("key is k3 value is "+p.get("k3"));
+    }
+
+    /**
+     * 用spring工厂set注入--用户自定义的成员变量：userDAO
+     * 第一种方式
+     */
+    @Test
+    public void test14() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) ctx.getBean("userService");
+        userService.login("zhangsan","12345678");
+    }
+
+    /**
+     * 用spring工厂set注入--用户自定义的成员变量：userDAO
+     * 第二种方式
+     */
+    @Test
+    public void test15() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) ctx.getBean("userService2");
+        userService.login("zhangsan","12345678");
+    }
 
 }

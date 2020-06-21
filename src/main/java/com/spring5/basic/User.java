@@ -4,7 +4,11 @@ public class User {
     private String name;
     private String password;
 
-    public User() {
+//    public User() {
+//    }
+
+    private User() {
+        System.out.println("User.User ");
     }
 
     public User(String name, String password) {
