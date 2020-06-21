@@ -213,5 +213,29 @@ public class SpringTest {
         UserService userService = (UserService) ctx.getBean("userService2");
         userService.login("zhangsan","12345678");
     }
+    /**
+     * 用spring工厂set注入--用户自定义的成员变量：userDAO
+     * 第二种方式.简化写法：基于属性的简化
+     */
+    @Test
+    public void test16() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) ctx.getBean("userService3");
+        userService.login("zhangsan","12345678");
+    }
+
+    /**
+     * 用spring工厂set注入--用户自定义的成员变量：userDAO
+     * 第二种方式.简化写法：基于p命名空间的简化
+     */
+    @Test
+    public void test17() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) ctx.getBean("userService4");
+        userService.login("zhangsan","12345678");
+        System.out.println("=================================");
+        Person person3 = (Person) ctx.getBean("person3");
+        System.out.println("person3 = " + person3);
+    }
 
 }

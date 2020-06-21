@@ -1,5 +1,6 @@
 package com.spring5.basic;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -79,6 +80,11 @@ public class Person {
         return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", emails=" + Arrays.toString(emails) +
+                ", tels=" + tels +
+                ", addresses=" + addresses +
+                ", qqs=" + qqs +
+                ", p=" + p +
                 '}';
     }
 }

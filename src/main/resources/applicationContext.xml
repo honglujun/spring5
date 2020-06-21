@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- id属性 名字（唯一标识）
@@ -75,6 +75,8 @@
             </props>
         </property>
     </bean>
+    <!-- 测试spring工厂的简化写法：基于p命名空间的简化,对于基本类型 -->
+    <bean id="person3" class="com.spring5.basic.Person" p:name="zhangsan" p:id="12345678"/>
 
     <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第一种方式 -->
     <bean id="userService" class ="com.spring5.basic.UserServiceImpl">
@@ -90,4 +92,13 @@
             <ref bean="userDAO"/>
         </property>
     </bean>
+    <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第二种方式。简化写法：基于属性的简化 -->
+    <bean id="userService3" class ="com.spring5.basic.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
+    <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第二种方式。简化写法：基于p命名空间的简化 -->
+    <bean id="userService4" class ="com.spring5.basic.UserServiceImpl" p:userDAO-ref="userDAO"/>
+
+
+
 </beans>
