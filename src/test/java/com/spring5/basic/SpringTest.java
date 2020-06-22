@@ -282,4 +282,6 @@ public class SpringTest {
         System.out.println("customer3 = " + customer3);
     }
 
+    // 控制反转。依赖注入
+
 }
