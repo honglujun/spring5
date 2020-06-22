@@ -1,5 +1,6 @@
 package com.spring5.basic;
 
+import com.spring5.basic.constructer.Customer;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -187,9 +188,9 @@ public class SpringTest {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         Person person = (Person) ctx.getBean("person2");
         Properties p = person.getP();
-        System.out.println("key is k1 value is "+p.get("k1"));
-        System.out.println("key is k2 value is "+p.get("k2"));
-        System.out.println("key is k3 value is "+p.get("k3"));
+        System.out.println("key is k1 value is " + p.get("k1"));
+        System.out.println("key is k2 value is " + p.get("k2"));
+        System.out.println("key is k3 value is " + p.get("k3"));
     }
 
     /**
@@ -200,7 +201,7 @@ public class SpringTest {
     public void test14() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService userService = (UserService) ctx.getBean("userService");
-        userService.login("zhangsan","12345678");
+        userService.login("zhangsan", "12345678");
     }
 
     /**
@@ -211,8 +212,9 @@ public class SpringTest {
     public void test15() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService userService = (UserService) ctx.getBean("userService2");
-        userService.login("zhangsan","12345678");
+        userService.login("zhangsan", "12345678");
     }
+
     /**
      * 用spring工厂set注入--用户自定义的成员变量：userDAO
      * 第二种方式.简化写法：基于属性的简化
@@ -221,7 +223,7 @@ public class SpringTest {
     public void test16() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService userService = (UserService) ctx.getBean("userService3");
-        userService.login("zhangsan","12345678");
+        userService.login("zhangsan", "12345678");
     }
 
     /**
@@ -232,10 +234,52 @@ public class SpringTest {
     public void test17() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService userService = (UserService) ctx.getBean("userService4");
-        userService.login("zhangsan","12345678");
+        userService.login("zhangsan", "12345678");
         System.out.println("=================================");
         Person person3 = (Person) ctx.getBean("person3");
         System.out.println("person3 = " + person3);
+    }
+
+    /**
+     * 测试构造器注入
+     */
+    @Test
+    public void test18() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Customer customer = (Customer) ctx.getBean("customer");
+        System.out.println("customer = " + customer);
+    }
+
+    /**
+     * 构造方法注入：当构造方法发生重载的时候，通过标签<constructor-arg>的个数来区分
+     * 调用了只有name参数的构造方法
+     */
+    @Test
+    public void test19() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Customer customer1 = (Customer) ctx.getBean("customer1");
+        System.out.println("customer1 = " + customer1);
+    }
+
+    /**
+     * 构造方法注入：当构造方法发生重载的时候，且标签<constructor-arg>的个数相同时，在标签中添加 type属性
+     * 只给age赋值
+     */
+    @Test
+    public void test20() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Customer customer2 = (Customer) ctx.getBean("customer2");
+        System.out.println("customer2 = " + customer2);
+    }
+    /**
+     * 构造方法注入：当构造方法发生重载的时候，且标签<constructor-arg>的个数相同时，在标签中添加 type属性
+     * 只给name赋值
+     */
+    @Test
+    public void test21() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Customer customer3 = (Customer) ctx.getBean("customer3");
+        System.out.println("customer3 = " + customer3);
     }
 
 }

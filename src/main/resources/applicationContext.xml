@@ -99,6 +99,37 @@
     <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第二种方式。简化写法：基于p命名空间的简化 -->
     <bean id="userService4" class ="com.spring5.basic.UserServiceImpl" p:userDAO-ref="userDAO"/>
 
+    <!-- 构造方法注入 -->
+    <bean id="customer" class="com.spring5.basic.constructer.Customer">
+        <!-- <constructor-arg>标签的个数与构造函数的参数个数一样，顺序一样 -->
+        <constructor-arg>
+            <value>zhangsan</value>
+        </constructor-arg>
+        <constructor-arg>
+            <value>103</value>
+        </constructor-arg>
+    </bean>
+    <!-- 构造方法注入：当构造方法发生重载的时候，通过标签<constructor-arg>的个数来区分 -->
+    <bean id="customer1" class="com.spring5.basic.constructer.Customer">
+        <!-- <constructor-arg>标签的个数与构造函数的参数个数一样，顺序一样 -->
+        <constructor-arg>
+            <value>zhangsan</value>
+        </constructor-arg>
+    </bean>
+    <!-- 构造方法注入：当构造方法发生重载的时候，且标签<constructor-arg>的个数相同时，在标签中添加 type属性  -->
+    <bean id="customer2" class="com.spring5.basic.constructer.Customer">
+        <!-- <constructor-arg>标签的个数与构造函数的参数个数一样，顺序一样 -->
+        <constructor-arg type="int">
+            <value>32</value>
+        </constructor-arg>
+    </bean>
+    <!-- 构造方法注入：当构造方法发生重载的时候，且标签<constructor-arg>的个数相同时，在标签中添加 type属性  -->
+    <bean id="customer3" class="com.spring5.basic.constructer.Customer">
+        <!-- <constructor-arg>标签的个数与构造函数的参数个数一样，顺序一样 -->
+        <constructor-arg type="java.lang.String">
+            <value>2432552f2</value>
+        </constructor-arg>
+    </bean>
 
 
 </beans>
