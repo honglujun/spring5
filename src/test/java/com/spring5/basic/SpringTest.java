@@ -284,6 +284,8 @@ public class SpringTest {
     }
 
     /**
+     * 测试实现FactoryBean接口的类
+     *
      * 复杂对象的bean：class中指定的类型 是FactoryBean接口的实现类(ConnectionFactoryBean)，
      * 那么通过id值获取的是这个类(ConnectionFactoryBean)所创建的复杂对象 Connection
      */
