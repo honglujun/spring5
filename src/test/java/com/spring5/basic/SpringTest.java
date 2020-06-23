@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import sun.plugin.security.JDK11ClassFileTransformer;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -282,6 +283,15 @@ public class SpringTest {
         System.out.println("customer3 = " + customer3);
     }
 
-    // 控制反转。依赖注入
+    /**
+     * 复杂对象的bean：class中指定的类型 是FactoryBean接口的实现类(ConnectionFactoryBean)，
+     * 那么通过id值获取的是这个类(ConnectionFactoryBean)所创建的复杂对象 Connection
+     */
+    @Test
+    public void test22(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+        Connection conn = (Connection) ctx.getBean("conn");
 
+        System.out.println("conn = " + conn);
+    }
 }
