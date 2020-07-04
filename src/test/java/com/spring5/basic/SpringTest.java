@@ -1,10 +1,11 @@
 package com.spring5.basic;
 
 import com.spring5.basic.constructer.Customer;
+import com.spring5.factorybean.ConnectionFactoryBean;
+import com.spring5.factorybean.ConnectionFactoryBean1;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import sun.plugin.security.JDK11ClassFileTransformer;
 
 import java.sql.Connection;
 import java.util.List;
@@ -293,7 +294,42 @@ public class SpringTest {
     public void test22(){
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Connection conn = (Connection) ctx.getBean("conn");
+        // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回true：只创建一次这种类型的复杂对象
+        // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回false：每一次都创建新的复杂对象
+        System.out.println("conn = " + conn);
+        System.out.println("conn = " + conn);
+    }
+
+    /**
+     * 测试实现FactoryBean接口的类
+     *
+     * 复杂对象的bean：class中指定的类型 是FactoryBean接口的实现类(ConnectionFactoryBean)，
+     * 那么通过id值获取的是这个类(ConnectionFactoryBean)所创建的复杂对象 Connection
+     *
+     * 若要获取FactoryBean接口的实现类(ConnectionFactoryBean)，那么在通过id值获取时，需要在在这个id前加上&
+     * 如 "&conn"
+     */
+    @Test
+    public void test23(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+        ConnectionFactoryBean conn = (ConnectionFactoryBean) ctx.getBean("&conn");
 
         System.out.println("conn = " + conn);
     }
+
+    /**
+     * 依赖注⼊的体会(DI)
+     *
+     * 把ConnectionFactoryBean中依赖的4个字符串信息 ，进⾏配置⽂件的注⼊
+     *
+     * 解耦合
+     */
+    @Test
+    public void test24(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+        Connection conn1 = (Connection) ctx.getBean("conn1");
+
+        System.out.println("conn1 = " + conn1);
+    }
+
 }
