@@ -38,7 +38,7 @@ public class SpringTest {
 
     @Test
     public void test4() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         // 指定名字（唯一标识）和全限定名，就不用像test3那样进行强转了
 //        Person person = ctx.getBean("person", Person.class);
 //        System.out.println("person = " + person);
@@ -332,4 +332,31 @@ public class SpringTest {
         System.out.println("conn1 = " + conn1);
     }
 
+    /**
+     * 实例工厂 创建 复杂对象
+     *
+     */
+    @Test
+    public void test25(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+        Connection conn2 = (Connection) ctx.getBean("conn2");
+        // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回true：只创建一次这种类型的复杂对象
+        // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回false：每一次都创建新的复杂对象
+        System.out.println("conn2 = " + conn2);
+        System.out.println("conn2 = " + conn2);
+    }
+
+    /**
+     * 静态工厂 创建 复杂对象
+     *
+     */
+    @Test
+    public void test26(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+        Connection conn2 = (Connection) ctx.getBean("staticConnectionFactory");
+        // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回true：只创建一次这种类型的复杂对象
+        // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回false：每一次都创建新的复杂对象
+        System.out.println("conn2 = " + conn2);
+        System.out.println("conn2 = " + conn2);
+    }
 }

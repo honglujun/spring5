@@ -7,7 +7,7 @@
     class属性 配置的全限定名 -->
     <bean id="person" class="com.spring5.basic.Person"/>
     <!-- name属性 别名 可以有多个，用逗号隔开  id相当于人的大名，name相当于人的小名字 -->
-    <bean id="person1" name ="p,p1" class="com.spring5.basic.Person"/>
+    <bean id="person1" name="p,p1" class="com.spring5.basic.Person"/>
     <!-- 只有class 属性也是可以的，spring会自己默认设置一个id属性 -->
     <bean class="com.spring5.basic.User"/>
     <!-- 测试私有换构造方法的类也可以被创建，因为底层用的是反射 -->
@@ -15,15 +15,15 @@
     <!-- 测试spring工厂set注入 -->
     <bean id="person2" class="com.spring5.basic.Person">
         <!-- jdk的八种基本类型 -->
-<!--        <property name="id">-->
-<!--            <value>123</value>-->
-<!--        </property>-->
+        <!--        <property name="id">-->
+        <!--            <value>123</value>-->
+        <!--        </property>-->
         <!-- jdk的八种基本类型的简化写法 -->
         <property name="id" value="123"/>
         <!-- jdk的八种基本类型 -->
-<!--        <property name="name">-->
-<!--            <value>李四</value>-->
-<!--        </property>-->
+        <!--        <property name="name">-->
+        <!--            <value>李四</value>-->
+        <!--        </property>-->
         <!-- jdk的八种基本类型的简化写法 -->
         <property name="name" value="李四"/>
         <!-- 数组类型赋值 -->
@@ -54,11 +54,15 @@
         <property name="qqs">
             <map>
                 <entry>
-                    <key><value>zhangsan</value></key>
+                    <key>
+                        <value>zhangsan</value>
+                    </key>
                     <value>9876823392</value>
                 </entry>
                 <entry>
-                    <key><value>lisi</value></key>
+                    <key>
+                        <value>lisi</value>
+                    </key>
                     <value>3455902020</value>
                 </entry>
                 <entry key="wangwu">
@@ -79,25 +83,25 @@
     <bean id="person3" class="com.spring5.basic.Person" p:name="zhangsan" p:id="12345678"/>
 
     <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第一种方式 -->
-    <bean id="userService" class ="com.spring5.basic.UserServiceImpl">
+    <bean id="userService" class="com.spring5.basic.UserServiceImpl">
         <property name="userDAO">
-            <bean class = "com.spring5.basic.UserDAOImpl"></bean>
+            <bean class="com.spring5.basic.UserDAOImpl"></bean>
         </property>
     </bean>
 
     <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第二种方式 -->
     <bean id="userDAO" class="com.spring5.basic.UserDAOImpl"/>
-    <bean id="userService2" class ="com.spring5.basic.UserServiceImpl">
+    <bean id="userService2" class="com.spring5.basic.UserServiceImpl">
         <property name="userDAO">
             <ref bean="userDAO"/>
         </property>
     </bean>
     <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第二种方式。简化写法：基于属性的简化 -->
-    <bean id="userService3" class ="com.spring5.basic.UserServiceImpl">
+    <bean id="userService3" class="com.spring5.basic.UserServiceImpl">
         <property name="userDAO" ref="userDAO"/>
     </bean>
     <!-- 测试spring工厂的 用户自定义的成员变量 的set注入 第二种方式。简化写法：基于p命名空间的简化 -->
-    <bean id="userService4" class ="com.spring5.basic.UserServiceImpl" p:userDAO-ref="userDAO"/>
+    <bean id="userService4" class="com.spring5.basic.UserServiceImpl" p:userDAO-ref="userDAO"/>
 
     <!-- 构造方法注入 -->
     <bean id="customer" class="com.spring5.basic.constructer.Customer">
@@ -147,6 +151,18 @@
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
+
+    <!-- 实例工厂 创建复杂对象
+        先创建实例对象， 在引用方法
+    -->
+    <bean id="connectionFactory" class="com.spring5.factorybean.ConnectionFactory"/>
+    <bean id="conn2" factory-bean="connectionFactory" factory-method="getConnection"/>
+
+    <!-- 静态工厂  创建复杂对象
+    直接创建对象，在对象中引用静态方法
+    -->
+    <bean id="staticConnectionFactory" class="com.spring5.factorybean.StaticConnectionFactory"
+          factory-method="getConnection"/>
 
 
 </beans>
