@@ -525,4 +525,23 @@ public class SpringTest {
         // 关闭spring工厂的时候，ctx.close()销毁对象
         ctx.close();
     }
+
+    /**
+     * 配置文件参数化
+     * ctx.getBean("conn1").castvar 快捷补全代码
+     * soutv 快捷补全输出
+     * soutm 快捷补全输出
+     *
+     * conn1 = com.mysql.jdbc.JDBC4Connection@3b2cf7ab
+     * SpringTest.test36
+     */
+    @Test
+    public void test36() {
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext1.xml");
+        Connection conn1 = (Connection) ctx.getBean("conn1");
+        // soutv
+        System.out.println("conn1 = " + conn1);
+        // soutm
+        System.out.println("SpringTest.test36");
+    }
 }

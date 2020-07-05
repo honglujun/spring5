@@ -63,4 +63,14 @@ public class ConnectionFactoryBean1 implements FactoryBean<Connection> {
         return false; // 每一次都创建新的复杂对象
         // return true; // 只创建一次这种类型的复杂对象
     }
+
+    @Override
+    public String toString() {
+        return "ConnectionFactoryBean1{" +
+                "driver='" + driver + '\'' +
+                ", url='" + url + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
