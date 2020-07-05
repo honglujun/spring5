@@ -274,6 +274,7 @@ public class SpringTest {
         Customer customer2 = (Customer) ctx.getBean("customer2");
         System.out.println("customer2 = " + customer2);
     }
+
     /**
      * 构造方法注入：当构造方法发生重载的时候，且标签<constructor-arg>的个数相同时，在标签中添加 type属性
      * 只给name赋值
@@ -287,12 +288,12 @@ public class SpringTest {
 
     /**
      * 测试实现FactoryBean接口的类
-     *
+     * <p>
      * 复杂对象的bean：class中指定的类型 是FactoryBean接口的实现类(ConnectionFactoryBean)，
      * 那么通过id值获取的是这个类(ConnectionFactoryBean)所创建的复杂对象 Connection
      */
     @Test
-    public void test22(){
+    public void test22() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Connection conn = (Connection) ctx.getBean("conn");
         // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回true：只创建一次这种类型的复杂对象
@@ -303,15 +304,15 @@ public class SpringTest {
 
     /**
      * 测试实现FactoryBean接口的类
-     *
+     * <p>
      * 复杂对象的bean：class中指定的类型 是FactoryBean接口的实现类(ConnectionFactoryBean)，
      * 那么通过id值获取的是这个类(ConnectionFactoryBean)所创建的复杂对象 Connection
-     *
+     * <p>
      * 若要获取FactoryBean接口的实现类(ConnectionFactoryBean)，那么在通过id值获取时，需要在在这个id前加上&
      * 如 "&conn"
      */
     @Test
-    public void test23(){
+    public void test23() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         ConnectionFactoryBean conn = (ConnectionFactoryBean) ctx.getBean("&conn");
 
@@ -320,13 +321,13 @@ public class SpringTest {
 
     /**
      * 依赖注⼊的体会(DI)
-     *
+     * <p>
      * 把ConnectionFactoryBean中依赖的4个字符串信息 ，进⾏配置⽂件的注⼊
-     *
+     * <p>
      * 解耦合
      */
     @Test
-    public void test24(){
+    public void test24() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Connection conn1 = (Connection) ctx.getBean("conn1");
 
@@ -335,10 +336,9 @@ public class SpringTest {
 
     /**
      * 实例工厂 创建 复杂对象
-     *
      */
     @Test
-    public void test25(){
+    public void test25() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Connection conn2 = (Connection) ctx.getBean("conn2");
         // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回true：只创建一次这种类型的复杂对象
@@ -349,10 +349,9 @@ public class SpringTest {
 
     /**
      * 静态工厂 创建 复杂对象
-     *
      */
     @Test
-    public void test26(){
+    public void test26() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Connection conn2 = (Connection) ctx.getBean("staticConnectionFactory");
         // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回true：只创建一次这种类型的复杂对象
@@ -363,13 +362,14 @@ public class SpringTest {
 
     /**
      * 输出的快捷键 soutv
-     *
+     * <p>
      * 测试对象创建的次数，配置文件中scope="singleton"---只创建一次
+     * 默认是singleton
      * account = com.spring5.scope.Account@ec756bd
      * account2 = com.spring5.scope.Account@ec756bd
      */
     @Test
-    public void test27(){
+    public void test27() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         Account account = (Account) ctx.getBean("account1");
         Account account2 = (Account) ctx.getBean("account1");
@@ -380,14 +380,15 @@ public class SpringTest {
 
     /**
      * 输出的快捷键 soutv
-     *
-     *测试对象创建的次数，配置文件中scope="prototype"---每次调用都创建一个新的对象
-     *
+     * <p>
+     * 测试对象创建的次数，配置文件中scope="prototype"---每次调用都创建一个新的对象
+     * <p>
+     * <p>
      * account = com.spring5.scope.Account@ec756bd
      * account2 = com.spring5.scope.Account@3c72f59f
      */
     @Test
-    public void test28(){
+    public void test28() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         Account account = (Account) ctx.getBean("account2");
         Account account2 = (Account) ctx.getBean("account2");
