@@ -3,6 +3,7 @@ package com.spring5.basic;
 import com.spring5.basic.constructer.Customer;
 import com.spring5.factorybean.ConnectionFactoryBean;
 import com.spring5.factorybean.ConnectionFactoryBean1;
+import com.spring5.scope.Account;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -358,5 +359,40 @@ public class SpringTest {
         // 当FactoryBean 接口的实现类 ConnectionFactoryBean的isSingleton()方法返回false：每一次都创建新的复杂对象
         System.out.println("conn2 = " + conn2);
         System.out.println("conn2 = " + conn2);
+    }
+
+    /**
+     * 输出的快捷键 soutv
+     *
+     * 测试对象创建的次数，配置文件中scope="singleton"---只创建一次
+     * account = com.spring5.scope.Account@ec756bd
+     * account2 = com.spring5.scope.Account@ec756bd
+     */
+    @Test
+    public void test27(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Account account = (Account) ctx.getBean("account1");
+        Account account2 = (Account) ctx.getBean("account1");
+
+        System.out.println("account = " + account);
+        System.out.println("account2 = " + account2);
+    }
+
+    /**
+     * 输出的快捷键 soutv
+     *
+     *测试对象创建的次数，配置文件中scope="prototype"---每次调用都创建一个新的对象
+     *
+     * account = com.spring5.scope.Account@ec756bd
+     * account2 = com.spring5.scope.Account@3c72f59f
+     */
+    @Test
+    public void test28(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Account account = (Account) ctx.getBean("account2");
+        Account account2 = (Account) ctx.getBean("account2");
+
+        System.out.println("account = " + account);
+        System.out.println("account2 = " + account2);
     }
 }

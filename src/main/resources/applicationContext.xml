@@ -164,5 +164,9 @@
     <bean id="staticConnectionFactory" class="com.spring5.factorybean.StaticConnectionFactory"
           factory-method="getConnection"/>
 
+    <!-- 简单对象的创建次数控制 scope ="singleton" 只创建一次，scope="prototype" 每一次都创建 -->
+    <bean id="account1" scope="singleton" class="com.spring5.scope.Account"/>
+    <bean id="account2" scope="prototype" class="com.spring5.scope.Account"/>
+
 
 </beans>
