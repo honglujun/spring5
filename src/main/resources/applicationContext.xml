@@ -178,6 +178,7 @@
     <!-- Spring生命周期中的对象的创建：当scope="singleton" 时，我们还想让对象的创建在 获取对象的时候创建对象，
     则需要在配置文件中添加 lazy-init="true",该属性默认是false-->
     <bean id="product3" scope="singleton" class="com.spring5.life.Product" lazy-init="true"/>
+    <!-- spring 生命周期中的初始化是在对象创建之后 -->
     <!-- spring 生命周期中的初始化: 注意2点：1.我们开发人员提供初始化方法，2.Spring调用初始化方法 -->
     <!-- spring 生命周期中的初始化:第一种方式：实现Spring提供的InitializingBean接口,实现afterPropertiesSet()方法-->
     <bean id="produce4" class="com.spring5.life.Product"/>
@@ -189,10 +190,17 @@
     (1). InitializingBean的afterPropertiesSet
     (2). 普通初始化⽅法
     2.当类中有注入操作的时候，注入操作与初始化的执行顺序：
-
+    先执行注入操作，在执行初始化
      -->
     <bean id="produce6" class="com.spring5.life.Product" init-method="myInit">
         <property name="name" value="zhangsan"/>
+    </bean>
+    <!-- 生命周期的对象的销毁：注意2点：1.在关闭spring工厂的时候，ctx.close()销毁对象。2.Spring调用销毁方法
+    这两点跟初始化的时候需要注意的相同。
+    需要注意的细节与初始化类似，先后顺序是 先Spring提供的接口DisposableBean的方法destroy() 后自己定义的销毁方法 myDestroy()
+    -->
+    <bean id="produce7" class="com.spring5.life.Product" init-method="myInit" destroy-method="myDestroy">
+        <property name="name" value="lisi"/>
     </bean>
 
 </beans>

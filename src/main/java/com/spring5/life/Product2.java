@@ -12,7 +12,7 @@ public class Product2 {
      * 手动写一个初始化方法
      */
     public void myInit() {
-        System.out.println("Product2.myInit");
+        System.out.println("Product2.myInit"  + Product2.this);
     }
 
 }

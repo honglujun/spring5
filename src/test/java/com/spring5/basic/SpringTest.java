@@ -492,4 +492,34 @@ public class SpringTest {
     public void test34() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
+
+    /**
+     * spring 生命周期中的销毁需要注意2点：
+     * 1.我们开发人员提供销毁方法，
+     * 2.Spring调用销毁方法
+     * 这两点跟初始化的时候需要注意的相同。
+     * <p>
+     * 生命周期的对象的销毁：注意2点：1.在关闭spring工厂的时候，ctx.close()销毁对象。2.Spring调用销毁方法
+     *
+     * 需要注意的细节与初始化类似，先后顺序是 先Spring提供的接口DisposableBean的方法destroy() 后自己定义的销毁方法 myDestroy()
+     *
+     * Product.Product:测试scope="singleton"
+     * Product.setName: lisi
+     * Product.afterPropertiesSetProduct{name='lisi'}
+     * Product2.myInitProduct{name='lisi'}
+     * 2020-07-05 16:49:36 DEBUG ClassPathXmlApplicationContext:987 - Closing org.springframework.context.support.ClassPathXmlApplicationContext@1fbc7afb, started on Sun Jul 05 16:49:35 CST 2020
+     * Product.destroy:Product{name='lisi'}
+     * Product2.myDestroyProduct{name='lisi'}
+     *
+     * Product.destroy:Product{name='zhangsan'}
+     * Product.destroy:Product{name='null'}
+     * Product.destroy:Product{name='null'}
+     * 这三次调用接口的销毁是bean 的 product6,product4,product1 的对象
+     */
+    @Test
+    public void test35() {
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        // 关闭spring工厂的时候，ctx.close()销毁对象
+        ctx.close();
+    }
 }
