@@ -544,4 +544,16 @@ public class SpringTest {
         // soutm
         System.out.println("SpringTest.test36");
     }
+
+    /**
+     * 测试自定义类型转换器
+     *
+     */
+    @Test
+    public void test37() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext2.xml");
+        com.spring5.converter.Person person = (com.spring5.converter.Person) ctx.getBean("person");
+        System.out.println("person = " + person);
+    }
+
 }
