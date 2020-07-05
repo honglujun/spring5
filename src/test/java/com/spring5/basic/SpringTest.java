@@ -485,8 +485,8 @@ public class SpringTest {
      * <p>
      * Product.Product:测试scope="singleton"
      * Product.setName: zhangsan
-     * Product.afterPropertiesSet
-     * Product2.myInit
+     * Product.afterPropertiesSetProduct{name='zhangsan'}
+     * Product2.myInitProduct{name='zhangsan'}
      */
     @Test
     public void test34() {
@@ -494,20 +494,22 @@ public class SpringTest {
     }
 
     /**
+     * 销毁方法的操作只适用于scope="singleton"
+     * <p>
      * spring 生命周期中的销毁需要注意2点：
      * 1.我们开发人员提供销毁方法，
      * 2.Spring调用销毁方法
      * 这两点跟初始化的时候需要注意的相同。
      * <p>
      * 生命周期的对象的销毁：注意2点：1.在关闭spring工厂的时候，ctx.close()销毁对象。2.Spring调用销毁方法
-     *
+     * <p>
      * 需要注意的细节与初始化类似，先后顺序是 先Spring提供的接口DisposableBean的方法destroy() 后自己定义的销毁方法 myDestroy()
-     *
+     * <p>
      * Product.Product:测试scope="singleton"
      * Product.setName: lisi
      * Product.afterPropertiesSetProduct{name='lisi'}
      * Product2.myInitProduct{name='lisi'}
-     * 2020-07-05 16:49:36 DEBUG ClassPathXmlApplicationContext:987 - Closing org.springframework.context.support.ClassPathXmlApplicationContext@1fbc7afb, started on Sun Jul 05 16:49:35 CST 2020
+     * 2020-07-05 17:06:51 DEBUG ClassPathXmlApplicationContext:987 - Closing org.springframework.context.support.ClassPathXmlApplicationContext@1fbc7afb, started on Sun Jul 05 17:06:49 CST 2020
      * Product.destroy:Product{name='lisi'}
      * Product2.myDestroyProduct{name='lisi'}
      *
@@ -519,6 +521,7 @@ public class SpringTest {
     @Test
     public void test35() {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Product produce7 = (Product) ctx.getBean("product7");
         // 关闭spring工厂的时候，ctx.close()销毁对象
         ctx.close();
     }
