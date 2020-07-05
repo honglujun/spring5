@@ -178,13 +178,21 @@
     <!-- Spring生命周期中的对象的创建：当scope="singleton" 时，我们还想让对象的创建在 获取对象的时候创建对象，
     则需要在配置文件中添加 lazy-init="true",该属性默认是false-->
     <bean id="product3" scope="singleton" class="com.spring5.life.Product" lazy-init="true"/>
-
     <!-- spring 生命周期中的初始化: 注意2点：1.我们开发人员提供初始化方法，2.Spring调用初始化方法 -->
     <!-- spring 生命周期中的初始化:第一种方式：实现Spring提供的InitializingBean接口,实现afterPropertiesSet()方法-->
     <bean id="produce4" class="com.spring5.life.Product"/>
     <!-- spring 生命周期中的初始化:第二种方式：直接写一个初始化方法：public void myInit(){}
     然后在bean中添加 init-method="myInit"-->
     <bean id="produce5" class="com.spring5.life.Product2" init-method="myInit"/>
+    <!-- 初始化操作的细节化分析:
+    1.同时实现了InitializingBean的初始化方法 和 自己的初始化方法myInit的执行顺序:
+    (1). InitializingBean的afterPropertiesSet
+    (2). 普通初始化⽅法
+    2.当类中有注入操作的时候，注入操作与初始化的执行顺序：
 
+     -->
+    <bean id="produce6" class="com.spring5.life.Product" init-method="myInit">
+        <property name="name" value="zhangsan"/>
+    </bean>
 
 </beans>

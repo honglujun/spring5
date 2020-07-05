@@ -3,6 +3,18 @@ package com.spring5.life;
 import org.springframework.beans.factory.InitializingBean;
 
 public class Product implements InitializingBean {
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        System.out.println("Product.setName: " + name);
+        this.name = name;
+    }
+
     /**
      * 快捷键 soutm
      * <p>
@@ -10,6 +22,13 @@ public class Product implements InitializingBean {
      */
     public Product() {
         System.out.println("Product.Product:测试scope=\"singleton\"");
+    }
+
+    /**
+     * 手动写一个初始化方法
+     */
+    public void myInit() {
+        System.out.println("Product2.myInit");
     }
 
     /**

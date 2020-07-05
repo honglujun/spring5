@@ -461,12 +461,35 @@ public class SpringTest {
      * spring 生命周期中的初始化:
      * 第二种方式：直接写一个初始化方法：public void myInit(){}
      * 然后在bean中添加 init-method="myInit"
-     *
+     * <p>
      * Product2.Product2：测试scope="prototype"
      * Product2.myInit
      */
     @Test
     public void test33() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+    }
+
+    /**
+     * spring 生命周期中的初始化需要注意2点：
+     * 1.我们开发人员提供初始化方法，
+     * 2.Spring调用初始化方法
+     * <p>
+     * 初始化操作的细节化分析:
+     * 1.同时实现了InitializingBean的初始化方法 和 自己的初始化方法myInit的执行顺序:
+     * (1). InitializingBean的afterPropertiesSet
+     * (2). 普通初始化⽅法
+     * <p>
+     * 2. 当对象中有注入操作时，注入操作与初始化的先后顺序：
+     * 先注入后初始化---afterPropertiesSet看这个方法名也知道是先注入后初始化
+     * <p>
+     * Product.Product:测试scope="singleton"
+     * Product.setName: zhangsan
+     * Product.afterPropertiesSet
+     * Product2.myInit
+     */
+    @Test
+    public void test34() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 }
