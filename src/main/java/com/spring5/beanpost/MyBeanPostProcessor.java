@@ -8,6 +8,13 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  */
 public class MyBeanPostProcessor  implements BeanPostProcessor {
 
+    /**
+     * 这里返回null 也不影响后面的after方法
+     * @param bean
+     * @param beanName
+     * @return
+     * @throws BeansException
+     */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         return null;
