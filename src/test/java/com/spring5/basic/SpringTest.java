@@ -1,6 +1,7 @@
 package com.spring5.basic;
 
 import com.spring5.basic.constructer.Customer;
+import com.spring5.beanpost.Category;
 import com.spring5.factorybean.ConnectionFactoryBean;
 import com.spring5.life.Product;
 import com.spring5.life.Product2;
@@ -560,5 +561,18 @@ public class SpringTest {
         com.spring5.converter.Person person = (com.spring5.converter.Person) ctx.getBean("person");
         System.out.println("person = " + person);
     }
+
+    /**
+     * 测试后置bean处理对象
+     *
+     * category = Category{id=123, name='lisi'}
+     */
+    @Test
+    public void test38() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext3.xml");
+        Category category = (Category) ctx.getBean("category");
+        System.out.println("category = " + category);
+    }
+
 
 }
