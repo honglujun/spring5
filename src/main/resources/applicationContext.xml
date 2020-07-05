@@ -169,13 +169,22 @@
     <bean id="account1" scope="singleton" class="com.spring5.scope.Account"/>
     <bean id="account2" scope="prototype" class="com.spring5.scope.Account"/>
 
-    <!-- Spring对象的创建：当scope="singleton" 时，Spring工厂被创建的时候，对象就被创建了-->
+    <!-- Spring的生命周期 -->
+    <!-- Spring生命周期中的对象的创建：当scope="singleton" 时，Spring工厂被创建的时候，对象就被创建了,
+    默认的scope就是singleton-->
     <bean id="product1" scope="singleton" class="com.spring5.life.Product"/>
-    <!-- Spring对象的创建：当scope="prototype" 时，获取对象的是后才创建对象-->
+    <!-- Spring生命周期中的对象的创建：当scope="prototype" 时，获取对象的是后才创建对象-->
     <bean id="product2" scope="prototype" class="com.spring5.life.Product2"/>
-    <!-- Spring对象的创建：当scope="singleton" 时，我们还想让对象的创建在获取对象的时候创建对象，
+    <!-- Spring生命周期中的对象的创建：当scope="singleton" 时，我们还想让对象的创建在 获取对象的时候创建对象，
     则需要在配置文件中添加 lazy-init="true",该属性默认是false-->
     <bean id="product3" scope="singleton" class="com.spring5.life.Product" lazy-init="true"/>
+
+    <!-- spring 生命周期中的初始化: 注意2点：1.我们开发人员提供初始化方法，2.Spring调用初始化方法 -->
+    <!-- spring 生命周期中的初始化:第一种方式：实现Spring提供的InitializingBean接口,实现afterPropertiesSet()方法-->
+    <bean id="produce4" class="com.spring5.life.Product"/>
+    <!-- spring 生命周期中的初始化:第二种方式：直接写一个初始化方法：public void myInit(){}
+    然后在bean中添加 init-method="myInit"-->
+    <bean id="produce5" class="com.spring5.life.Product2" init-method="myInit"/>
 
 
 </beans>

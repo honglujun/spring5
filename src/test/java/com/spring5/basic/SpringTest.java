@@ -436,4 +436,37 @@ public class SpringTest {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         Product product1 = (Product) ctx.getBean("product1");
     }
+
+    /**
+     * spring 生命周期中的初始化需要注意2点：
+     * 1.我们开发人员提供初始化方法，
+     * 2.Spring调用初始化方法
+     * <p>
+     * spring 生命周期中的初始化:
+     * 第一种方式：实现Spring提供的InitializingBean接口,实现afterPropertiesSet()方法
+     * <p>
+     * Product.Product:测试scope="singleton"
+     * Product.afterPropertiesSet
+     */
+    @Test
+    public void test32() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+    }
+
+    /**
+     * spring 生命周期中的初始化需要注意2点：
+     * 1.我们开发人员提供初始化方法，
+     * 2.Spring调用初始化方法
+     * <p>
+     * spring 生命周期中的初始化:
+     * 第二种方式：直接写一个初始化方法：public void myInit(){}
+     * 然后在bean中添加 init-method="myInit"
+     *
+     * Product2.Product2：测试scope="prototype"
+     * Product2.myInit
+     */
+    @Test
+    public void test33() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+    }
 }
