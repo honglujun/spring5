@@ -5,7 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- MyDateConverter对象创建出来-->
-    <bean id="myDateConverter" class="com.spring5.converter.MyDateConverter"/>
+    <bean id="myDateConverter" class="com.spring5.converter.MyDateConverter">
+        <property name="pattern" value="yyyy-MM-dd"/>
+    </bean>
     <!--⽤于注册类型转换器 注意 conversionService 不能写成别的，否则报错
     将自定义的类型转换器 myDateConverter 注册到 ConversionServiceFactoryBean
     -->

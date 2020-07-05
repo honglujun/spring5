@@ -512,7 +512,7 @@ public class SpringTest {
      * 2020-07-05 17:06:51 DEBUG ClassPathXmlApplicationContext:987 - Closing org.springframework.context.support.ClassPathXmlApplicationContext@1fbc7afb, started on Sun Jul 05 17:06:49 CST 2020
      * Product.destroy:Product{name='lisi'}
      * Product2.myDestroyProduct{name='lisi'}
-     *
+     * <p>
      * Product.destroy:Product{name='zhangsan'}
      * Product.destroy:Product{name='null'}
      * Product.destroy:Product{name='null'}
@@ -531,7 +531,7 @@ public class SpringTest {
      * ctx.getBean("conn1").castvar 快捷补全代码
      * soutv 快捷补全输出
      * soutm 快捷补全输出
-     *
+     * <p>
      * conn1 = com.mysql.jdbc.JDBC4Connection@3b2cf7ab
      * SpringTest.test36
      */
@@ -547,7 +547,12 @@ public class SpringTest {
 
     /**
      * 测试自定义类型转换器
-     *
+     * <p>
+     * 实现Spring的Converter接口
+     * <p>
+     * 其实Spring内置了date的类型转换器，但是日期的格式必须是 2020/05/02种类型，不支持2020-05-02
+     * <p>
+     * person = Person{name='张三', birthday=Tue Feb 04 00:00:00 CST 2014}
      */
     @Test
     public void test37() {
