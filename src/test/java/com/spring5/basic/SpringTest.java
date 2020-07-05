@@ -2,7 +2,8 @@ package com.spring5.basic;
 
 import com.spring5.basic.constructer.Customer;
 import com.spring5.factorybean.ConnectionFactoryBean;
-import com.spring5.factorybean.ConnectionFactoryBean1;
+import com.spring5.life.Product;
+import com.spring5.life.Product2;
 import com.spring5.scope.Account;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -395,5 +396,44 @@ public class SpringTest {
 
         System.out.println("account = " + account);
         System.out.println("account2 = " + account2);
+    }
+
+    /**
+     * 测试对象创建
+     * <p>
+     * 当对象是scope="singleton" 时，spring工厂创建的时候，对象就创建了
+     * <p>
+     * Product对象的创建：
+     * Product.Product:测试scope="singleton"
+     */
+    @Test
+    public void test29() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+    }
+
+    /**
+     * 测试对象创建
+     * <p>
+     * 当对象是scope="prototype" 时，对象是在获取时创建,即：ctx.getBean()的时候
+     * <p>
+     * Product对象的创建：
+     * Product2.Product2：测试scope="prototype"
+     */
+    @Test
+    public void test30() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Product2 product2 = (Product2) ctx.getBean("product2");
+    }
+
+    /**
+     * 当scope="singleton"时，我们还想让 对象的创建在获取对象的时候发生，
+     * 即在ctx.getBean()的时候创建对象，则需要在配置文件中添加 lazy-init="true"，默认是false
+     * 即：懒加载
+     * Product.Product:测试scope="singleton"
+     */
+    @Test
+    public void test31() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Product product1 = (Product) ctx.getBean("product1");
     }
 }
