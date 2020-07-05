@@ -7,6 +7,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 自定义类型转换器
+ * 实现Spring的Converter接口
+ */
 public class MyDateConverter implements Converter<String, Date> {
 
     /**
