@@ -10,7 +10,8 @@ public class ConnectionFactoryBean implements FactoryBean<Connection> {
     @Override
     public Connection getObject() throws Exception {
         Class<?> clazz = Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecoai?useSSL=false", "root", "root");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "123456");
+        //Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecoai?useSSL=false", "root", "root");
         return conn;
     }
 
