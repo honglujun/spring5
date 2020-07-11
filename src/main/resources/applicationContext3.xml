@@ -10,7 +10,7 @@
     </bean>
     <!--后置bean处理对象 会处理所有的bean对象-->
     <bean id="myBeanPostProcessor" class="com.spring5.beanpost.MyBeanPostProcessor"/>
-
+    <!--后置bean处理对象 会处理所有的bean对象，所以person也是会被MyBeanPostProcessor处理-->
     <bean id="person" class="com.spring5.converter.Person"/>
 
 </beans>
