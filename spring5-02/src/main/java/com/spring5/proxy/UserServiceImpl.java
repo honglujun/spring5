@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(User user) {
         System.out.println("UserServiceImpl.register 业务逻辑代码 调用DAO");
+        throw new RuntimeException("原始方法抛出异常");
     }
 
     @Override

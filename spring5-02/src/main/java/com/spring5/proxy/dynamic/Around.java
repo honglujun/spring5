@@ -27,7 +27,13 @@ public class Around  implements MethodInterceptor {
     public Object invoke(MethodInvocation invocation) throws Throwable {
         System.out.println("====原始方法执行之前执行=====");
         // 额外功能所执行的原始方法
-        Object ret = invocation.proceed();
+        Object ret = null;
+        try {
+            ret = invocation.proceed();
+        } catch (Throwable throwable) {
+            System.out.println("======额外功能在原始方法抛出异常的时候执行======");
+            throwable.printStackTrace();
+        }
         System.out.println("====原始方法执行之后执行=====");
         return ret;
     }
