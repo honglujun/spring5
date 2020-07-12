@@ -7,7 +7,7 @@
     <!--需要实现spring代理的目标类-->
     <bean id="userService" class="com.spring5.proxy.UserServiceImpl"/>
     <bean id="orderService" class="com.spring5.proxy.OrderServiceImpl"/>
-    <!--实现MethodBeforeAdvice接口-->
+    <!--实现MethodBeforeAdvice接口,额外功能的书写-->
     <!--<bean id="before" class="com.spring5.proxy.dynamic.Before"/>-->
     <bean id="before" class="com.spring5.proxy.dynamic.Before1"/>
 
