@@ -9,13 +9,17 @@
     <bean id="orderService" class="com.spring5.proxy.OrderServiceImpl"/>
     <!--实现MethodBeforeAdvice接口,额外功能的书写-->
     <!--<bean id="before" class="com.spring5.proxy.dynamic.Before"/>-->
-    <bean id="before" class="com.spring5.proxy.dynamic.Before1"/>
+    <!--<bean id="before" class="com.spring5.proxy.dynamic.Before1"/>-->
+    <!--实现MethodInterceptor接口,额外功能的书写-->
+    <bean id="around" class="com.spring5.proxy.dynamic.Around"/>
 
     <aop:config>
         <!--所有的方法，都作为切入点，加入到额外的功能 eg: login() register()-->
         <aop:pointcut id="pc" expression="execution(* * (..))"/>
         <!--组装：把 切入点（pc） 和 额外的功能（before） 组装-->
-        <aop:advisor advice-ref="before" pointcut-ref="pc"/>
+        <!--<aop:advisor advice-ref="before" pointcut-ref="pc"/>-->
+        <!--组装：把 切入点（pc） 和 额外的功能（around） 组装-->
+        <aop:advisor advice-ref="around" pointcut-ref="pc"/>
     </aop:config>
 
 
