@@ -6,7 +6,7 @@ import org.aopalliance.intercept.MethodInvocation;
 /**
  * 额外功能的
  */
-public class Around  implements MethodInterceptor {
+public class Around1 implements MethodInterceptor {
     /**
      * invoke方法的作用：额外功能书写在invoke方法中
      *                 额外功能可以书写在  原始方法之前
@@ -24,20 +24,15 @@ public class Around  implements MethodInterceptor {
      *                这个返回值是可以影响原始方法的返回值的：
      *                若invoke方法的invocation.proceed()的结果作为返回值直接返回，则不会影响返回结果
      *                若invoke方法的invocation.proceed()的结果被这里的方法修改了，返回的结果就会随之改变
+     *                针对UserServiceImpl的login方法做测试：这个login方法返回的是true，但是在这里的return的是false，所以结果应该是false
      * @throws Throwable
      */
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         System.out.println("====原始方法执行之前执行=====");
         // 额外功能所执行的原始方法
-        Object ret = null;
-        try {
-            ret = invocation.proceed();
-        } catch (Throwable throwable) {
-            System.out.println("======额外功能在原始方法抛出异常的时候执行======");
-            throwable.printStackTrace();
-        }
-        System.out.println("====原始方法执行之后执行=====");
-        return ret;
+        Object ret =  invocation.proceed();
+
+        return false;
     }
 }

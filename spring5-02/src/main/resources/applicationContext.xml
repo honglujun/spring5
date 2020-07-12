@@ -11,7 +11,8 @@
     <!--<bean id="before" class="com.spring5.proxy.dynamic.Before"/>-->
     <!--<bean id="before" class="com.spring5.proxy.dynamic.Before1"/>-->
     <!--实现MethodInterceptor接口,额外功能的书写-->
-    <bean id="around" class="com.spring5.proxy.dynamic.Around"/>
+    <!--<bean id="around" class="com.spring5.proxy.dynamic.Around"/>-->
+    <bean id="around" class="com.spring5.proxy.dynamic.Around1"/>
 
     <aop:config>
         <!--所有的方法，都作为切入点，加入到额外的功能 eg: login() register()-->
