@@ -40,6 +40,16 @@ public class TestProxy {
         // 获得代理对象后，可以通过声明接⼝类型(UserService)，进⾏对象的存储
         UserService userService = (UserService) ctx.getBean("userService");
         userService.register(new User());
-        userService.login("zhangsan","password");
+        userService.login("zhangsan", "password");
+    }
+
+    /**
+     * 测试orderService的动态代理
+     */
+    @Test
+    public void test3() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        OrderService orderService = (OrderService) ctx.getBean("orderService");
+        orderService.showOrder();
     }
 }

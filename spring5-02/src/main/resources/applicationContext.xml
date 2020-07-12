@@ -6,8 +6,10 @@
 
     <!--需要实现spring代理的目标类-->
     <bean id="userService" class="com.spring5.proxy.UserServiceImpl"/>
+    <bean id="orderService" class="com.spring5.proxy.OrderServiceImpl"/>
     <!--实现MethodBeforeAdvice接口-->
-    <bean id="before" class="com.spring5.proxy.dynamic.Before"/>
+    <!--<bean id="before" class="com.spring5.proxy.dynamic.Before"/>-->
+    <bean id="before" class="com.spring5.proxy.dynamic.Before1"/>
 
     <aop:config>
         <!--所有的方法，都作为切入点，加入到额外的功能 eg: login() register()-->
