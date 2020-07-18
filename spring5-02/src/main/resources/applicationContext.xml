@@ -16,7 +16,13 @@
 
     <aop:config>
         <!--所有的方法，都作为切入点，加入到额外的功能 eg: login() register()-->
-        <aop:pointcut id="pc" expression="execution(* * (..))"/>
+        <!--<aop:pointcut id="pc" expression="execution(* *(..))"/>-->
+        <!-- 以login方法为切入点 -->
+        <!--<aop:pointcut id="pc" expression="execution(* login(..))"/>-->
+        <!-- 以login(String name,String password)为切入点 -->
+        <!--<aop:pointcut id="pc" expression="execution(* login(String,String))"/>-->
+        <!-- 更加精准的找到切入点 -->
+        <aop:pointcut id="pc" expression="execution(* com.spring5.proxy.UserServiceImpl.login(..))"/>
         <!--组装：把 切入点（pc） 和 额外的功能（before） 组装-->
         <!--<aop:advisor advice-ref="before" pointcut-ref="pc"/>-->
         <!--组装：把 切入点（pc） 和 额外的功能（around） 组装-->
