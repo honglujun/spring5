@@ -8,6 +8,7 @@
     <bean id="userService" class="com.spring5.proxy.UserServiceImpl"/>
     <bean id="orderService" class="com.spring5.proxy.OrderServiceImpl"/>
     <bean id="userService2" class="com.spring5.proxy.UserServiceImplProxy"/>
+
     <!--实现MethodBeforeAdvice接口,额外功能的书写-->
     <!--<bean id="before" class="com.spring5.proxy.dynamic.Before"/>-->
     <!--<bean id="before" class="com.spring5.proxy.dynamic.Before1"/>-->
