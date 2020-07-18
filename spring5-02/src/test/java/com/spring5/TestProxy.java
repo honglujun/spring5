@@ -39,9 +39,12 @@ public class TestProxy {
         // 这里是通过原始对象的 id值（userService）来获取 代理对象
         // 获得代理对象后，可以通过声明接⼝类型(UserService)，进⾏对象的存储
         UserService userService = (UserService) ctx.getBean("userService");
+        UserService userService2 = (UserService) ctx.getBean("userService2");
         userService.register(new User());
         boolean login = userService.login("zhangsan", "password");
+        boolean login2 = userService2.login("zhangsan", "password");
         System.out.println("TestProxy.test2: " + login);
+        System.out.println("TestProxy.test2.login2: " + login2);
     }
 
     /**
