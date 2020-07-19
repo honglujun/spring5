@@ -26,7 +26,9 @@
         <!-- 更加精准的找到切入点 -->
         <!--<aop:pointcut id="pc" expression="execution(* com.spring5.proxy.UserServiceImpl.login(..))"/>-->
         <!-- 类切入点: 类下面的所有方法-->
-        <aop:pointcut id="pc" expression="execution(* *..UserServiceImpl.*(..))"/>
+        <!--<aop:pointcut id="pc" expression="execution(* *..UserServiceImpl.*(..))"/>-->
+        <!-- 包切入点: 当前包以及子包都需要-->
+        <aop:pointcut id="pc" expression="execution(* com.spring5.proxy..*.*(..))"/>
         <!--组装：把 切入点（pc） 和 额外的功能（before） 组装-->
         <!--<aop:advisor advice-ref="before" pointcut-ref="pc"/>-->
         <!--组装：把 切入点（pc） 和 额外的功能（around） 组装-->
