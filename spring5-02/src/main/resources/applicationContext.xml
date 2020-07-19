@@ -32,7 +32,9 @@
         <!-- args切入点函数：主要用于函数(方法) 参数的匹配-->
         <!--<aop:pointcut id="pc" expression="args(String,String)"/>-->
         <!-- within:主要用于进行类、包切入点表达式的匹配-->
-        <aop:pointcut id="pc" expression="within(*..UserServiceImpl)"/>
+        <!--<aop:pointcut id="pc" expression="within(*..UserServiceImpl)"/>-->
+        <!-- @annotation 为具有特殊注解的方法加入额外功能-->
+        <aop:pointcut id="pc" expression="@annotation(com.spring5.proxy.Log)"/>
         <!--组装：把 切入点（pc） 和 额外的功能（before） 组装-->
         <!--<aop:advisor advice-ref="before" pointcut-ref="pc"/>-->
         <!--组装：把 切入点（pc） 和 额外的功能（around） 组装-->

@@ -10,6 +10,7 @@ public class UserServiceImpl implements UserService {
      *
      * @param user
      */
+    @Log
     @Override
     public void register(User user) {
         System.out.println("UserServiceImpl.register 业务逻辑代码 调用DAO");
